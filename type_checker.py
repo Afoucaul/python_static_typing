@@ -86,8 +86,3 @@ def typing_policy(*policies):
         return typing_policy_decorated
 
     return typing_policy_decorator
-
-
-@typing_policy(Policy.castArg, Policy.castReturn)
-def add(x: int, y: int) -> str:
-    return x+y
