@@ -1,5 +1,4 @@
-import policy
-from typed_function import TypedFunction
+from .typed_function import TypedFunction
 
 
 def typing_policy(policy):
