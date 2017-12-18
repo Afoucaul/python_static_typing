@@ -1,10 +1,17 @@
 class TypedFunction:
-    def __init__(self, function):
+    def __init__(self, function, policy):
         self.function = function
+        self.policy = policy
+
         self.args_t, self.kwargs_t = self._make_type_masks()
+        self.result_t = object
+
+        if 'return' in self.function.__annotations__:
+            self.result_t = self.function.__annotations__['return']
 
     def __call__(self, *args, **kwargs):
-        args_t, kwargs_t = self.process_arguments(args, kwargs)
+        args = list(args)
+        self.process_arguments(args, kwargs)
         result = self.process_result(self.function(*args, **kwargs))
 
         return result
@@ -31,14 +38,8 @@ class TypedFunction:
         return args_t, kwargs_t
 
     def process_arguments(self, args, kwargs):
-        pass
+        self.policy.process_args(args, self.args_t)
+        self.policy.process_kwargs(kwargs, self.kwargs_t)
 
     def process_result(self, result):
-        pass
-
-
-if __name__ == '__main__':
-    def add(w, x: int, y: int, *, z: str="hello"):
-        pass
-
-    typed_add = TypedFunction(add)
+        return self.policy.process_result(result, self.result_t)
