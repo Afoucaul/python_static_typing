@@ -2,6 +2,21 @@
 
 This package provides a way to enforce static typing, by making use of Python's annotation system.
 
+The purpose of this package is to show the feasibility of making Python a statically typed language.
+Additionally, this is motivated by an incentive to prove the usefulness of Python's annotations.
+
+# Overview
+
+What you can do with this package:
+
+    >>> @typing_policy(policy.STRICT)
+    ... def add(x: int, y: int) -> int:
+    ...     return x + y
+    ...
+    >>> add("Hello ", "World!")
+    TypeError: Expected an instance of <class 'int'>, received <class 'str'> instance 'Hello '
+        
+
 # How to use this package
 
 This package provides a `typing_policy` decorator, to be used along with instances of the `Policy` class.
