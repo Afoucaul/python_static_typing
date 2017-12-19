@@ -15,6 +15,15 @@ What you can do with this package:
     ...
     >>> add("Hello ", "World!")
     TypeError: Expected an instance of <class 'int'>, received <class 'str'> instance 'Hello '
+    
+Another example:
+
+    >>> @typing_policy(policy.CAST)
+    ... def add(x: int, y: int) -> int:
+    ...     return x + y
+    ...
+    >>> add("12", "27")
+    39
         
 
 # How to use this package
